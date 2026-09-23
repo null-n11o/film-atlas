@@ -1,0 +1,6 @@
+---
+import {renderLinks} from '../lib/view/render';
+import type {PageView} from '../lib/view/types';
+interface Props {view:PageView}
+---
+<Fragment set:html={renderLinks(Astro.props.view)}/>

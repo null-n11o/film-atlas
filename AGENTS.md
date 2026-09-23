@@ -1,6 +1,6 @@
 # film-atlas
 
-映画を入口に歴史・文化・制作・人物の背景を知るWebサービス。現在は開発準備段階。
+映画を入口に歴史・文化・制作・人物の背景を知るWebサービス。作品選定に依存しない機能を実装中。実コンテンツの制作は未着手。
 
 ## 読む順序
 
@@ -12,17 +12,26 @@
 
 ## 開発ハーネス
 
-選択待ち。`/Users/nakanokentaro/.agents/harnesses/dev-harness/SKILL.md` の手順でユーザーが選択してから設定する。複数を同時に既定にしない。会社リポジトリの設定を変更しない。
+2026-09-23にユーザーがSuperpowersを選択。brainstormingで設計を整理し、設計確認後にwriting-plansで実装計画を作成する。Codexではスキル単体を使用する。
+仕様は `docs/superpowers/specs/`、実装計画は `docs/superpowers/plans/` に置く。複数のハーネスを同時に既定にせず、会社リポジトリの設定は変更しない。
 
 ## Commands
 
-実装前のためアプリの起動・テスト・ビルドコマンドは未定。導入後に実行確認したコマンドだけを記載する。
+Node.js 22.22.3。実行確認したコマンド：
+
+- `npm run dev`：原稿を検証してローカル起動。
+- `npm run check`：Astro・TypeScriptの型検査。
+- `npm test`：単体・隔離ビルド検証。
+- `npm run validate:content`：内容の参照・公開条件の検証。
+- `npm run build`：通常成果物をdistへ生成。
+- `npm run build:e2e`：架空資料を.runtime/e2e-distへ生成。
+- `npm run test:e2e`：Chromium・WebKitでブラウザー検証。
 
 文書変更はリンク、合意と提案の区分、`git diff --check` を確認する。アプリのテストを実行したとは記録しない。
 
 ## Architecture
 
-未決定。開発要件・設計・実装計画の正本はこのリポジトリに置く。仕様の保存先は選択したハーネスに従う。会社の企画・判断・市場調査は01_kcpを参照し、本文を重複管理しない。
+[詳細設計](docs/superpowers/specs/2026-09-23-film-atlas-design.md)は2026-09-23に承認済み。[実装計画](docs/superpowers/plans/2026-09-23-film-atlas.md)は同日に承認済み。NativeでTask 1〜7を順次実装し、最後に独立レビューを行う。開発要件・設計・実装計画の正本はこのリポジトリに置く。会社の企画・判断・市場調査は01_kcpを参照し、本文を重複管理しない。
 
 ## Working rules
 
@@ -45,4 +54,4 @@
 
 ## 開発フロー
 
-上位PLAN → ローカルリポジトリと規約 → ハーネス選択 → 仕様・実装計画 → CEOレビュー → 実装・検証。実装後の変更は意味のある単位でコミットし、既存の接続先があればpush・PRまで進める。現時点ではリモート未設定。
+上位PLAN → ローカルリポジトリと規約 → ハーネス選択 → 仕様・実装計画 → CEOレビュー → 実装・検証。実装後の変更は意味のある単位でコミットし、既存の接続先があればpush・PRまで進める。originは `https://github.com/null-n11o/film-atlas.git`。

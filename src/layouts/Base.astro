@@ -1,0 +1,16 @@
+---
+import '../styles/global.css';
+import {manifest} from '../lib/content/manifest';
+import {site} from '../site';
+const {title,summary='映画を入口に、歴史・文化・制作・人物の背景を読む。'}=Astro.props;
+const testMode=manifest().mode==='e2e';
+const canonical=site.url?new URL(Astro.url.pathname,site.url).href:null;
+---
+<!doctype html><html lang="ja"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>{title} | film-atlas</title><meta name="description" content={summary}/><meta property="og:title" content={title}/><meta property="og:description" content={summary}/>{testMode&&<meta name="robots" content="noindex,nofollow"/>}{canonical&&<><link rel="canonical" href={canonical}/><meta property="og:url" content={canonical}/></>}</head><body>
+<a class="skip-link" href="#main">本文へ移動</a>
+{testMode&&<div class="test-banner">テスト専用画面 · 架空の作品・資料で動作を確認しています</div>}
+<header class="site-header"><a class="brand" href="/">film-atlas<span>映画の背景を読む</span></a><nav aria-label="メイン"><a href="/">作品一覧</a><a href="/about/">このサイトについて</a></nav></header>
+<main id="main" tabindex="-1"><slot/></main>
+<footer><span>film-atlas</span><p>歴史、描写、発言、解釈を区別して読む。</p><a href="/about/">出典と訂正の方針</a></footer>
+<noscript><p class="noscript">安全な本文と一覧を表示しています。ネタバレの切替にはJavaScriptが必要です。</p></noscript>
+</body></html>

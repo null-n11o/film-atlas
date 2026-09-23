@@ -1,0 +1,6 @@
+---
+import {renderPlaceList} from '../lib/view/exploration';
+import type {PageView} from '../lib/view/types';
+interface Props {view:PageView}
+---
+<Fragment set:html={renderPlaceList(Astro.props.view)}/>

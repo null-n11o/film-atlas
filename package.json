@@ -1,0 +1,30 @@
+{
+  "name": "film-atlas",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx scripts/build.ts dev",
+    "check": "astro check",
+    "test": "vitest run",
+    "validate:content": "tsx scripts/validate-content.ts",
+    "build": "tsx scripts/build.ts production",
+    "build:e2e": "tsx scripts/build.ts e2e",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "astro": "7.3.4",
+    "gray-matter": "4.0.3",
+    "markdown-it": "15.0.2",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@playwright/test": "1.63.0",
+    "@types/markdown-it": "14.2.0",
+    "@types/node": "22.20.4",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "vitest": "5.0.1"
+  }
+}

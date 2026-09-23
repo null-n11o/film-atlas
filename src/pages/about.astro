@@ -1,0 +1,5 @@
+---
+import Base from '../layouts/Base.astro';
+import {site} from '../site';
+---
+<Base title="このサイトについて"><div class="reading-layout prose"><p class="eyebrow">ABOUT FILM-ATLAS</p><h1>映画から、背景へ。</h1><p>映画を入口に、歴史・文化・制作・人物の背景を知るためのサイトです。</p><h2>出典と記述の区分</h2><p>歴史・背景の説明、作中の描写、本人の発言、編集者の解釈を区別して掲載します。各記述の出典から、資料名と該当箇所を確認できます。</p><h2>ネタバレの表示</h2><p>初めはネタバレを隠します。作品ごとに許可した内容だけを、同じタブの閲覧中に表示します。保存を利用できない場合は現在のページだけで有効です。外部資料には、そのサイトの表示方針が適用されます。</p><h2>訂正と内容の確認</h2><p>資料と説明の対応を人が確認してから掲載します。誤りが分かった内容は修正または取り下げ、変更後に再確認します。</p>{site.publicName&&<p>運営：{site.publicName.value}</p>}{site.note&&<p><a href={site.note.value} rel="noreferrer">運営者のnote（外部サイト）</a></p>}{site.contact&&<p><a href={site.contact.value}>訂正の連絡先</a></p>}</div></Base>

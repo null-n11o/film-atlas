@@ -1,0 +1,6 @@
+---
+import {renderReferences} from '../lib/view/render';
+import type {PageView} from '../lib/view/types';
+interface Props {view:PageView}
+---
+<Fragment set:html={renderReferences(Astro.props.view)}/>

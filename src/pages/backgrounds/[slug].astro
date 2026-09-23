@@ -1,0 +1,7 @@
+---
+import EntityPage from '../../components/EntityPage.astro';
+import {pages} from '../../lib/content/manifest';
+export function getStaticPaths(){return pages('background').map(entity=>({params:{slug:entity.slug},props:{entity}}));}
+const {entity}=Astro.props;
+---
+<EntityPage entity={entity}/>

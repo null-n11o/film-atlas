@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import Content from './Content.astro';
+import SpoilerControls from './SpoilerControls.astro';
+import {manifest} from '../lib/content/manifest';
+import {projectPage} from '../lib/view/project';
+import type {PublicEntity,PageRef} from '../lib/content/types';
+interface Props {entity:PublicEntity}
+const {entity}=Astro.props;
+const page={kind:entity.kind,id:entity.id} as PageRef;
+const publication=manifest();
+const view=projectPage(publication.base,page,new Set());
+const allEntities=[...publication.base.entities,...publication.groups.flatMap(g=>g.graph.entities)];
+const required=new Set([page.id,...publication.groups.filter(g=>g.graph.entities.some(e=>e.kind===page.kind&&e.id===page.id)).flatMap(g=>g.requires)]);
+const works=[...new Map(allEntities.filter(e=>e.kind==='work'&&(page.kind!=='work'||required.has(e.id))).map(e=>[e.id,e])).values()];
+const pageData=JSON.stringify({page,base:publication.base,groups:publication.groups.map(({token,requires})=>({token,requires}))}).replace(/</g,'\\u003c');
+const category={work:'作品と背景',background:'背景解説',person:'人物と作品'}[page.kind];
+---
+<Base title={entity.safeTitle} summary={entity.safeSummary}><div class="reading-layout" data-reading-root><header class="page-intro"><a class="back-link" href="/">作品一覧へ戻る</a><p class="eyebrow">{category}</p><h1 data-page-title>{entity.safeTitle}</h1>{entity.payload.type==='work'&&<p class="meta">{entity.payload.releaseYear}年公開</p>}<p class="lead">{entity.safeSummary}</p></header><SpoilerControls page={page} works={works}/><Content view={view}/><script id="page-data" type="application/json" set:html={pageData}/></div></Base>
+
+<script>import "../scripts/page";</script>

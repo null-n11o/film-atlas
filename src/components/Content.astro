@@ -1,0 +1,7 @@
+---
+import {renderPageBody} from '../lib/view/render';
+import type {PageView} from '../lib/view/types';
+interface Props {view:PageView}
+const {view}=Astro.props;
+---
+<div id="page-content" set:html={renderPageBody(view)}/>
