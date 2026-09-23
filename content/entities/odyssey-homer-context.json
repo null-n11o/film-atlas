@@ -1,0 +1,33 @@
+{
+  "id": "odyssey-homer-context",
+  "revision": 1,
+  "status": "draft",
+  "review": null,
+  "spoilerWorkIds": [],
+  "kind": "relation",
+  "slug": null,
+  "safeTitle": "接点：odyssey-homer-context",
+  "safeSummary": "映画の原典であるホメロスの叙事詩を読むための背景。",
+  "title": {
+    "text": "接点：odyssey-homer-context",
+    "spoilerWorkIds": []
+  },
+  "payload": {
+    "type": "relation",
+    "from": {
+      "kind": "work",
+      "id": "odyssey-2026"
+    },
+    "to": {
+      "kind": "background",
+      "id": "homer-war-and-homecoming"
+    },
+    "relationKind": "context",
+    "reasonStatementIds": [
+      "odyssey-homer-context-reason"
+    ],
+    "evidenceRefs": [
+      "evidence-odyssey-homer-context"
+    ]
+  }
+}

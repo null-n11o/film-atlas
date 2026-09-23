@@ -1,0 +1,33 @@
+{
+  "id": "homer-period-chronology",
+  "revision": 1,
+  "status": "draft",
+  "review": null,
+  "spoilerWorkIds": [],
+  "kind": "relation",
+  "slug": null,
+  "safeTitle": "接点：homer-period-chronology",
+  "safeSummary": "解説資料がホメロスを位置づける時代。物語内の出来事の年は示さない。",
+  "title": {
+    "text": "接点：homer-period-chronology",
+    "spoilerWorkIds": []
+  },
+  "payload": {
+    "type": "relation",
+    "from": {
+      "kind": "background",
+      "id": "homer-war-and-homecoming"
+    },
+    "to": {
+      "kind": "event",
+      "id": "homer-eighth-century"
+    },
+    "relationKind": "chronology",
+    "reasonStatementIds": [
+      "homer-period-chronology-reason"
+    ],
+    "evidenceRefs": [
+      "evidence-homer-period-chronology"
+    ]
+  }
+}

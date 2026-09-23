@@ -1,0 +1,22 @@
+{
+  "id": "source-troy-unesco",
+  "revision": 1,
+  "status": "draft",
+  "review": null,
+  "spoilerWorkIds": [],
+  "kind": "source",
+  "slug": null,
+  "safeTitle": "Archaeological Site of Troy",
+  "safeSummary": "原稿の根拠資料。人による内容確認は未完了。",
+  "title": {
+    "text": "Archaeological Site of Troy",
+    "spoilerWorkIds": []
+  },
+  "payload": {
+    "type": "source",
+    "author": "UNESCO World Heritage Centre",
+    "url": "https://whc.unesco.org/en/list/849/",
+    "bibliography": "Outstanding Universal Value / Brief synthesis、所在地、座標欄。",
+    "accessedOn": "2026-09-23"
+  }
+}

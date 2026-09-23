@@ -1,0 +1,22 @@
+{
+  "id": "source-odyssey-jp",
+  "revision": 1,
+  "status": "draft",
+  "review": null,
+  "spoilerWorkIds": [],
+  "kind": "source",
+  "slug": null,
+  "safeTitle": "映画『オデュッセイア』日本公式サイト",
+  "safeSummary": "原稿の根拠資料。人による内容確認は未完了。",
+  "title": {
+    "text": "映画『オデュッセイア』日本公式サイト",
+    "spoilerWorkIds": []
+  },
+  "payload": {
+    "type": "source",
+    "author": "映画『オデュッセイア』日本公式サイト（配給：ビターズ・エンド）",
+    "url": "https://odyssey-film.jp/",
+    "bibliography": "作品名、INTRODUCTION、DIRECTOR。外部ページには物語の詳細も含まれる。",
+    "accessedOn": "2026-09-23"
+  }
+}

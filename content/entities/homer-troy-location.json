@@ -1,0 +1,33 @@
+{
+  "id": "homer-troy-location",
+  "revision": 1,
+  "status": "draft",
+  "review": null,
+  "spoilerWorkIds": [],
+  "kind": "relation",
+  "slug": null,
+  "safeTitle": "接点：homer-troy-location",
+  "safeSummary": "トロイアの物語に関係する考古遺跡の現在の所在地。",
+  "title": {
+    "text": "接点：homer-troy-location",
+    "spoilerWorkIds": []
+  },
+  "payload": {
+    "type": "relation",
+    "from": {
+      "kind": "background",
+      "id": "homer-war-and-homecoming"
+    },
+    "to": {
+      "kind": "place",
+      "id": "troy-archaeological-site"
+    },
+    "relationKind": "location",
+    "reasonStatementIds": [
+      "homer-troy-location-reason"
+    ],
+    "evidenceRefs": [
+      "evidence-homer-troy-location"
+    ]
+  }
+}
