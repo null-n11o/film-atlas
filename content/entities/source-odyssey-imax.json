@@ -1,0 +1,22 @@
+{
+  "id": "source-odyssey-imax",
+  "revision": 1,
+  "status": "draft",
+  "review": null,
+  "spoilerWorkIds": [],
+  "kind": "source",
+  "slug": null,
+  "safeTitle": "New Trailer Unveiled for Christopher Nolan’s The Odyssey",
+  "safeSummary": "原稿の根拠資料。人による内容確認は未完了。",
+  "title": {
+    "text": "New Trailer Unveiled for Christopher Nolan’s The Odyssey",
+    "spoilerWorkIds": []
+  },
+  "payload": {
+    "type": "source",
+    "author": "NBCUniversal",
+    "url": "https://www.nbcuniversal.com/article/christopher-nolans-odyssey-unveils-new-trailer-first-film-shot-entirely-imax-cameras",
+    "bibliography": "2026年5月7日。冒頭の撮影方式説明、末尾の製作クレジット。予告映像を含む。",
+    "accessedOn": "2026-09-23"
+  }
+}

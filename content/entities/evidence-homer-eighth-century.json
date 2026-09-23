@@ -1,0 +1,26 @@
+{
+  "id": "evidence-homer-eighth-century",
+  "revision": 1,
+  "status": "draft",
+  "review": null,
+  "spoilerWorkIds": [],
+  "kind": "evidence",
+  "slug": null,
+  "safeTitle": "根拠：homer-eighth-century",
+  "safeSummary": "記述と資料の対応。",
+  "title": {
+    "text": "根拠：homer-eighth-century",
+    "spoilerWorkIds": []
+  },
+  "payload": {
+    "type": "evidence",
+    "sourceId": "source-homer-met",
+    "target": {
+      "kind": "event",
+      "id": "homer-eighth-century"
+    },
+    "locator": "本文第3段落のホメロスの時代説明",
+    "verificationNote": "AI調査メモ（人による確認前）：紀元前8世紀という資料の時代区分を概算として記録。単年の成立日やトロイア戦争の日付ではない。内部値は紀元前800年=-799、紀元前701年=-700。",
+    "support": "fact"
+  }
+}

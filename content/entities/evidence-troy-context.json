@@ -1,0 +1,26 @@
+{
+  "id": "evidence-troy-context",
+  "revision": 1,
+  "status": "draft",
+  "review": null,
+  "spoilerWorkIds": [],
+  "kind": "evidence",
+  "slug": null,
+  "safeTitle": "根拠：troy-context",
+  "safeSummary": "記述と資料の対応。",
+  "title": {
+    "text": "根拠：troy-context",
+    "spoilerWorkIds": []
+  },
+  "payload": {
+    "type": "evidence",
+    "sourceId": "source-troy-unesco",
+    "target": {
+      "kind": "content-statement",
+      "id": "troy-context"
+    },
+    "locator": "Outstanding Universal Value / Brief synthesisの所在地と複数時代の遺構の説明、座標欄",
+    "verificationNote": "AI調査メモ（人による確認前）：遺跡の存在を神話上の出来事や映画の描写の史実性の証明として扱わない。",
+    "support": "fact"
+  }
+}

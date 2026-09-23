@@ -1,0 +1,20 @@
+{
+  "id": "christopher-nolan",
+  "revision": 1,
+  "status": "draft",
+  "review": null,
+  "spoilerWorkIds": [],
+  "kind": "person",
+  "slug": "christopher-nolan",
+  "safeTitle": "クリストファー・ノーラン",
+  "safeSummary": "映画『オデュッセイア』の監督・脚本・製作を担当。",
+  "title": {
+    "text": "クリストファー・ノーラン",
+    "spoilerWorkIds": []
+  },
+  "payload": {
+    "type": "person",
+    "name": "クリストファー・ノーラン",
+    "disambiguation": "映画監督・脚本家・プロデューサー"
+  }
+}

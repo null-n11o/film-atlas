@@ -1,0 +1,26 @@
+{
+  "id": "evidence-homer-troy-location",
+  "revision": 1,
+  "status": "draft",
+  "review": null,
+  "spoilerWorkIds": [],
+  "kind": "evidence",
+  "slug": null,
+  "safeTitle": "根拠：homer-troy-location",
+  "safeSummary": "記述と資料の対応。",
+  "title": {
+    "text": "根拠：homer-troy-location",
+    "spoilerWorkIds": []
+  },
+  "payload": {
+    "type": "evidence",
+    "sourceId": "source-troy-unesco",
+    "target": {
+      "kind": "relation",
+      "id": "homer-troy-location"
+    },
+    "locator": "Brief synthesisのヒサルルク所在地説明、Criterion (vi)の文学との関係",
+    "verificationNote": "AI調査メモ（人による確認前）：関係の理由と始点・終点の対応を確認する。",
+    "support": "fact"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "id": "evidence-odyssey-imax",
+  "revision": 1,
+  "status": "draft",
+  "review": null,
+  "spoilerWorkIds": [],
+  "kind": "evidence",
+  "slug": null,
+  "safeTitle": "根拠：odyssey-imax",
+  "safeSummary": "記述と資料の対応。",
+  "title": {
+    "text": "根拠：odyssey-imax",
+    "spoilerWorkIds": []
+  },
+  "payload": {
+    "type": "evidence",
+    "sourceId": "source-odyssey-imax",
+    "target": {
+      "kind": "content-statement",
+      "id": "odyssey-imax"
+    },
+    "locator": "2026年5月7日記事の冒頭の撮影方式説明と末尾の製作クレジット",
+    "verificationNote": "AI調査メモ（人による確認前）：全編IMAXと製作会社の公表内容を要約。監督本人の引用ではない。",
+    "support": "fact"
+  }
+}

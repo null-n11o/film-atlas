@@ -1,0 +1,26 @@
+{
+  "id": "evidence-homer-period-chronology",
+  "revision": 1,
+  "status": "draft",
+  "review": null,
+  "spoilerWorkIds": [],
+  "kind": "evidence",
+  "slug": null,
+  "safeTitle": "根拠：homer-period-chronology",
+  "safeSummary": "記述と資料の対応。",
+  "title": {
+    "text": "根拠：homer-period-chronology",
+    "spoilerWorkIds": []
+  },
+  "payload": {
+    "type": "evidence",
+    "sourceId": "source-homer-met",
+    "target": {
+      "kind": "relation",
+      "id": "homer-period-chronology"
+    },
+    "locator": "本文第3段落：ホメロスと紀元前8世紀",
+    "verificationNote": "AI調査メモ（人による確認前）：関係の理由と始点・終点の対応を確認する。",
+    "support": "fact"
+  }
+}

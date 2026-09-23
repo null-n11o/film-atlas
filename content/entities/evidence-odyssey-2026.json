@@ -1,0 +1,26 @@
+{
+  "id": "evidence-odyssey-2026",
+  "revision": 1,
+  "status": "draft",
+  "review": null,
+  "spoilerWorkIds": [],
+  "kind": "evidence",
+  "slug": null,
+  "safeTitle": "根拠：odyssey-2026",
+  "safeSummary": "記述と資料の対応。",
+  "title": {
+    "text": "根拠：odyssey-2026",
+    "spoilerWorkIds": []
+  },
+  "payload": {
+    "type": "evidence",
+    "sourceId": "source-odyssey-jp",
+    "target": {
+      "kind": "work",
+      "id": "odyssey-2026"
+    },
+    "locator": "作品ロゴ、INTRODUCTION、DIRECTOR",
+    "verificationNote": "AI調査メモ（人による確認前）：邦題と監督名。公開年と原題はUniversal Pictures Canadaの作品紹介を併読。",
+    "support": "fact"
+  }
+}

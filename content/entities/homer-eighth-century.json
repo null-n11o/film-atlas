@@ -1,0 +1,27 @@
+{
+  "id": "homer-eighth-century",
+  "revision": 1,
+  "status": "draft",
+  "review": null,
+  "spoilerWorkIds": [],
+  "kind": "event",
+  "slug": null,
+  "safeTitle": "ホメロスの叙事詩が位置づけられる時代",
+  "safeSummary": "メトロポリタン美術館の解説がホメロスを位置づける紀元前8世紀。映画の劇中年代とは分ける。",
+  "title": {
+    "text": "ホメロスの叙事詩が位置づけられる時代",
+    "spoilerWorkIds": []
+  },
+  "payload": {
+    "type": "event",
+    "domain": "history",
+    "worldId": null,
+    "start": -799,
+    "end": -700,
+    "dateLabel": "紀元前8世紀ごろ（文学史上の位置づけ）",
+    "certainty": "approximate",
+    "evidenceRefs": [
+      "evidence-homer-eighth-century"
+    ]
+  }
+}

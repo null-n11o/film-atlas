@@ -1,0 +1,63 @@
+# 最初の1作品：オデュッセイア
+
+更新日：2026-09-23。状態：初稿を作成し、人による内容確認待ち。Task 8は進行中、Task 9は未着手。
+
+## 確定した範囲
+
+ユーザーが『オデュッセイア』（2026年）を選択し、まず1作品を掲載する進め方と、中野さんによる最終確認に同意した。これは対象と担当の決定であり、今回作成した本文への承認ではない。
+
+作品IDは `odyssey-2026`、原題はThe Odyssey。作品、背景解説、人物、場所、年代項目を各1件用意した。原稿全体は33レコードと11記述で、すべてrevision 1・draft・review null。確認者と確認日は未記入。
+
+## 中野さんの確認対象
+
+- **作品**：[概要](../../content/statements/01-odyssey-overview.md)、[制作の背景](../../content/statements/02-odyssey-imax.md)。
+- **背景**：[二つの叙事詩](../../content/statements/10-homer-epics.md)、[文学史上の時代](../../content/statements/11-homer-period.md)、[トロイア遺跡](../../content/statements/12-troy-context.md)、[映画との接点](../../content/statements/13-odyssey-source-connection.md)。
+- **人物**：[ノーランの担当](../../content/statements/20-nolan-role.md)。
+- **探索**：[遺跡の所在地](../../content/entities/troy-archaeological-site.json)、[年表の時代区分](../../content/entities/homer-eighth-century.json)。
+- **関係**：映画から背景、人物から映画、背景から場所・年代への4つの関係。理由の原稿は `content/statements/*-reason.md`。
+
+本文だけでなく、ページの見出し・概要・出典・地図の説明・年表の文言も同じ確認範囲に含む。初稿では核心的な筋書き、結末、映画独自の脚色の比較を扱っていない。ネタバレなしの指定が妥当かも確認する。
+
+## 出典と読み分け
+
+| 資料 | 採用箇所と用途 | 限界 |
+| --- | --- | --- |
+| [日本公式サイト](https://odyssey-film.jp/) | 作品名、INTRODUCTION、DIRECTOR | 外部ページには詳細なあらすじを含む。転載せず、邦題と担当を確認 |
+| [Universal Pictures Canada](https://universalpictures.ca/movie/the-odyssey/) | 作品紹介、Directed by、Written by、Produced by、Cast | 公開年と原題、原典、担当の根拠。7月17日は日本公開日として使わない |
+| [The Met：Geometric Art in Ancient Greece](https://www.metmuseum.org/essays/geometric-art-in-ancient-greece) | 本文第1・3段落 | 原典の主題と文学史上の時代。映画の場面や戦争の実年代を裏付ける資料とは分ける |
+| [UNESCO：Archaeological Site of Troy](https://whc.unesco.org/en/list/849/) | Brief synthesis、Criterion (vi)、座標欄 | 遺跡の所在地。映画の撮影地、個別場面、主人公の航路を示さない |
+| [NBCUniversal：製作紹介](https://www.nbcuniversal.com/article/christopher-nolans-odyssey-unveils-new-trailer-first-film-shot-entirely-imax-cameras) | 2026年5月7日記事の撮影方式説明 | 製作側が公表した全編IMAX撮影の情報。予告映像を含む外部ページ |
+
+全資料のAI参照日は2026-09-23。根拠レコードに主張のIDと該当箇所を記録した。人による資料内容・素材条件・ネタバレの確認は未実施。
+
+地図にはUNESCOの座標 N39 57 23.184 E26 14 20.4を十進数39.95644、26.239へ変換した代表点を使う。位置精度は概算とし、歴史的な城壁や海岸線は描かない。年表の紀元前8世紀ごろは概算の時代区分であり、原典の成立を単年で確定しない。
+
+画像・動画・原文引用は採用していない。神話上の出来事を考古学的な事実として追加せず、本人の発言や考察の欄も埋めるためには作っていない。
+
+## 受入条件の状態
+
+| 条件 | 現在の状態 |
+| --- | --- |
+| 作品名・公開年・安全な概要 | 下書きあり。人による確認待ち |
+| 背景解説1件以上と記述ごとの出典 | 下書きあり。人による確認待ち |
+| 人物1人以上と作品との接点 | 下書きあり。人による確認待ち |
+| 場所・年代各1件以上と解説へのリンク | 下書きあり。人による確認待ち |
+| ネタバレ制御 | 実原稿には制御対象を含めていない。制御の動作検証は架空資料の記録を参照 |
+| 実コンテンツの通常画面での動線 | 未実施。内容確認後に通常生成対象へ移して検証 |
+| 最初の1作品の受入 | 未実施 |
+
+確認結果を受領するまでは[制作手順](../content-workflow.md)に従い下書きを保持する。通常ビルドの空一覧と、下書き確認用の表示を区別する。
+
+## 初稿の検証
+
+`npm run validate:content` と `npm run build` が成功した。通常ビルドは空一覧・運営方針・404の3ページとなり、出力に作品名と作品IDが含まれないことを確認した。今回の変更は原稿と文書で、アプリの単体・E2E検証は再実行していない。
+
+同じ本文描画・CSSを使うローカル専用の確認用画面を `.runtime/odyssey-review` に生成し、`http://127.0.0.1:4326/` で起動した。通常の公開処理は使わず、原稿のstatus・reviewを変更していない。補助スクリプト `.runtime/render-odyssey-review.ts` と生成物はGit対象外のセッション内資料。通常アプリの受入検証とは分ける。
+
+Browserで作品・背景・人物をPC幅1280pxとスマートフォン幅390pxで確認し、ページ間の往復と地図選択を操作した。確認画面の初回生成で地図用スクリプトの読み込みに不備があり、既存の地図処理をバンドルして再生成した。アプリ本体の変更はない。
+
+3ページとも幅320・390・1280pxで横はみ出しがなく、出典などのページ内リンクの参照先が存在することを確認した。
+
+日本語校閲と機械検査を実施し、critical・warning・infoは各0件、検査対象外は0件だった。独立したAIレビューで主要事実と出典、座標、年代、下書き状態を照合した。制作手順の「人の内容確認をAIで代替しない」という文の意味が逆転していたため修正した。このレビューは中野さんの内容確認を代替しない。
+
+会社側の未決事項には以前の開発段階の記載が残る。今回の選定合意は本記録へ保存し、会社側の正本とNotionへの同期は未実施。
