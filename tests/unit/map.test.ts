@@ -1,0 +1,4 @@
+import {expect,it} from 'vitest';
+import {projectMap} from '../../src/lib/map/project';
+it('keeps dateline neighbors close and groups identical coordinates',()=>{const out=projectMap([{id:'a',lat:0,lon:179},{id:'b',lat:0,lon:-179},{id:'c',lat:0,lon:179}]);expect(out.bounds.east-out.bounds.west).toBeLessThan(20);expect(out.groups.flatMap(x=>x.ids).sort()).toEqual(['a','b','c']);expect(out.groups.some(g=>g.ids.length===2)).toBe(true);});
+it.each([{points:[]},{points:[{id:'a',lat:90,lon:0}]},{points:[{id:'a',lat:-90,lon:0},{id:'b',lat:90,lon:0}]}])('handles empty, single and poles without invalid coordinates',({points})=>{const m=projectMap(points);expect(m.bounds.north).toBeLessThanOrEqual(90);expect(m.bounds.south).toBeGreaterThanOrEqual(-90);for(const p of m.groups){expect(p.x).toBeGreaterThanOrEqual(40);expect(p.x).toBeLessThanOrEqual(960);expect(p.y).toBeGreaterThanOrEqual(40);expect(p.y).toBeLessThanOrEqual(460);}});

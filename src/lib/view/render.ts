@@ -1,3 +1,4 @@
+import {renderPlaceMap,renderPlaceList,renderTimeline} from './exploration';
 import type {PageView} from './types';
 export const escapeHtml=(value:string)=>value.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]!));
 const kinds:Record<string,string>={history:'歴史・背景',depiction:'作中の描写',statement:'本人の発言',interpretation:'編集者の解釈'};
@@ -8,5 +9,5 @@ export function renderLinks(view:PageView){return view.links.length?`<section><h
 export function renderPageBody(view:PageView):string{
  const groups=new Map<string,typeof view.blocks>();
  for(const b of view.blocks){const heading=b.kind==='statement'?'本人の発言':b.kind==='interpretation'?'編集者の解釈':b.section==='connection'?'作品との接点':b.section==='production'?'制作の背景':b.section==='acting'?'役作り':b.section==='summary'?'作品の概要':'背景の説明';const groupKey=heading+(b.workLabels.length?'：'+b.workLabels.join('・'):'');groups.set(groupKey,[...(groups.get(groupKey)??[]),b]);}
- return `<p class="reading-time">読む目安 ${view.readingMinutes}分</p>${[...groups].map(([heading,blocks])=>`<section class="prose"><h2>${escapeHtml(heading)}</h2>${blocks.map(b=>`<article id="statement-${escapeHtml(b.id)}"><span class="kind-label">${kinds[b.kind]}</span><div>${b.html}</div>${b.quote?`<p class="meta">${escapeHtml(b.quote)}</p>`:''}<div>${citations(b.evidenceIds,view)}</div></article>`).join('')}</section>`).join('')}${renderLinks(view)}${view.pageKind==='work'&&!view.links.some(l=>l.targetKind==='work')?'<p class="empty-state">関連作品はまだ掲載していません</p>':''}${renderReferences(view)}`;
+ return `<p class="reading-time">読む目安 ${view.readingMinutes}分</p>${[...groups].map(([heading,blocks])=>`<section class="prose"><h2>${escapeHtml(heading)}</h2>${blocks.map(b=>`<article id="statement-${escapeHtml(b.id)}"><span class="kind-label">${kinds[b.kind]}</span><div>${b.html}</div>${b.quote?`<p class="meta">${escapeHtml(b.quote)}</p>`:''}<div>${citations(b.evidenceIds,view)}</div></article>`).join('')}</section>`).join('')}${renderLinks(view)}${view.pageKind==='work'&&!view.links.some(l=>l.targetKind==='work')?'<p class="empty-state">関連作品はまだ掲載していません</p>':''}${view.places.length?`<section id="places"><h2>場所から読む</h2>${renderPlaceMap(view)}${renderPlaceList(view)}</section>`:""}${renderTimeline(view)}${renderReferences(view)}`;
 }

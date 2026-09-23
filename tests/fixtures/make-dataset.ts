@@ -1,6 +1,6 @@
 import type { Dataset, Entity, Payload, Ref, Statement } from '../../src/lib/content/types';
 export const base = () => ({ revision: 1, status: 'published' as const, review: { by: 'テスト専用の架空確認者', date: '2026-09-23', revision: 1 }, spoilerWorkIds: [] as string[] });
-export function entity(id:string, payload:Payload, title:string, slug:string|null=null):Entity {
+export function entity<P extends Payload>(id:string, payload:P, title:string, slug:string|null=null):Entity & {payload:P} {
  return {...base(),id,kind:payload.type,slug,safeTitle:title,safeSummary:'TEST_ONLY 動作確認のための架空資料。',title:{text:title,spoilerWorkIds:[]},payload};
 }
 export function addEvidence(data:Dataset,id:string,target:Ref|{kind:'content-statement';id:string},sourceId='s1'){
@@ -39,5 +39,6 @@ export function makeDataset(): Dataset {
  addRelation(data,'r-secret-place',{kind:'background',id:'b1'},{kind:'place',id:'l-secret'},'location');
  addRelation(data,'r-related',{kind:'work',id:'w1'},{kind:'work',id:'w2'},'comparison');
  const reason=data.statements.find(x=>x.id==='reason-r-related')!;reason.markdown='SPOILER_RELATED';reason.spoilerWorkIds=['w1','w2'];
+ const event=entity('e-secret',{type:'event',domain:'story',worldId:null,start:2000,end:2000,dateLabel:'テスト用2000年',certainty:'exact',evidenceRefs:['ev-e-secret']},'SPOILER_EVENT');event.spoilerWorkIds=['w1'];data.entities.push(event);addEvidence(data,'ev-e-secret',{kind:'event',id:'e-secret'});addRelation(data,'r-secret-event',{kind:'background',id:'b1'},{kind:'event',id:'e-secret'},'chronology');
  return data;
 }
