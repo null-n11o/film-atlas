@@ -130,3 +130,89 @@ test("without JavaScript safe links work and controls stay disabled", async ({
   ).toBeVisible();
   await context.close();
 });
+test("failed revocation cannot restore old permission after reload or pageshow", async ({
+  page,
+}) => {
+  await page.goto("/works/test-work-a/");
+  await page.getByRole("button", { name: show, exact: true }).click();
+  await expect(
+    page.getByText("SPOILER_SENTINEL", { exact: true }),
+  ).toBeVisible();
+  await page.evaluate(() => {
+    Storage.prototype.setItem = () => {
+      throw Error("quota");
+    };
+  });
+  await page.getByRole("button", { name: hide, exact: true }).click();
+  await page.evaluate(() => {
+    window.dispatchEvent(new Event("pagehide"));
+    window.dispatchEvent(new Event("pageshow"));
+  });
+  await expect(
+    page.getByRole("button", { name: show, exact: true }),
+  ).toBeVisible();
+  await page.reload();
+  await expect(
+    page.getByRole("button", { name: show, exact: true }),
+  ).toBeVisible();
+  await expect(page.locator("body")).not.toContainText("SPOILER_");
+});
+test("guarded direct page grants its requirements and resolves formal titles by specificity", async ({
+  page,
+  request,
+}) => {
+  const url = "/works/test-guarded-work/";
+  expect(await (await request.get(url)).text()).not.toContain("SPOILER_");
+  await page.goto(url);
+  await page.getByRole("button", { name: show, exact: true }).click();
+  await expect(
+    page.getByText("TEST_ONLY 条件付き本文", { exact: true }),
+  ).toHaveCount(0);
+  await expect(page.locator("h1")).toHaveText("条件付きテスト作品");
+  await page
+    .getByRole("button", { name: /テスト専用作品（2001）のネタバレを表示/ })
+    .click();
+  await expect(page.locator("h1")).toHaveText("SPOILER_FORMAL_TITLE");
+  await expect(
+    page.getByText("TEST_ONLY 条件付き本文", { exact: true }),
+  ).toBeVisible();
+  await page.reload();
+  await expect(page.locator("h1")).toHaveText("SPOILER_FORMAL_TITLE");
+  await page
+    .getByRole("button", { name: /テスト専用作品（2001）のネタバレを隠す/ })
+    .click();
+  await expect(page.locator("h1")).toHaveText("条件付きテスト作品");
+  await expect(page.locator("title")).not.toContainText("SPOILER_");
+});
+test("authorized heading appears while metadata stays safe", async ({
+  page,
+}) => {
+  await page.addInitScript(() =>
+    sessionStorage.setItem(
+      "film-atlas:spoilers:v1",
+      JSON.stringify({ version: 1, workIds: ["w2", "w3"] }),
+    ),
+  );
+  await page.goto("/works/test-guarded-work/");
+  await expect(page.locator("h1")).toHaveText("SPOILER_FORMAL_TITLE");
+  await expect(page.locator("title")).not.toContainText("SPOILER_");
+});
+test("malformed additional HTML is rejected before DOM insertion", async ({
+  page,
+}) => {
+  await page.route("**/_content/*.json", async (route) => {
+    const response = await route.fetch();
+    const group = await response.json();
+    if (group.graph.statements.length)
+      group.graph.statements[0].html =
+        "<img src=data:,x onerror=globalThis.__atlasXss=1//";
+    await route.fulfill({ response, json: group });
+  });
+  await page.goto("/works/test-work-a/");
+  await page.getByRole("button", { name: show, exact: true }).click();
+  await expect(page.getByRole("button", { name: "再試行" })).toBeVisible();
+  await expect(page.locator("#page-content img")).toHaveCount(0);
+  expect(
+    await page.evaluate(() => Reflect.get(globalThis, "__atlasXss")),
+  ).toBeUndefined();
+});

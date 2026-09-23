@@ -21,7 +21,9 @@ export type GuardedText = Entity["title"];
 export type Dataset = { entities: Entity[]; statements: Statement[] };
 export type Issue = { code: string; ref: string; message: string };
 export type PublicPayload =
-  | Exclude<Payload, { type: "evidence" | "asset" }>
+  | Exclude<Payload, { type: "evidence" | "asset" | "work" | "person" }>
+  | Omit<Extract<Payload, { type: "work" }>, "jaTitle" | "originalTitle">
+  | Omit<Extract<Payload, { type: "person" }>, "name">
   | Omit<Extract<Payload, { type: "evidence" }>, "verificationNote">
   | (Omit<Extract<Payload, { type: "asset" }>, "path" | "checkedBy"> & {
       publicUrl: string;

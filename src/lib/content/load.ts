@@ -4,6 +4,8 @@ import matter from "gray-matter";
 import { parseEntity, parseStatement } from "./schema";
 import type { Dataset } from "./types";
 export function readStatement(text: string) {
+  text = text.replace(/^\uFEFF/, "");
+  if (!/^---\r?\n/.test(text)) throw Error("YAML_FRONTMATTER_REQUIRED");
   const p = matter(text);
   return parseStatement(p.data, p.content);
 }

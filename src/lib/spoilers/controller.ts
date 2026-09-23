@@ -1,15 +1,19 @@
 import type { PageRef, PublishedGraph } from "../content/types";
-import { projectPage, key } from "../view/project";
+import { projectPage } from "../view/project";
 import { renderPageBody } from "../view/render";
 import { canView } from "./policy";
 import { readAllowed, writeAllowed } from "./store";
 import { parseGroup } from "./response";
+import { mergeVisibleGraph } from "./merge";
 export function mountSpoilers(
   root: HTMLElement,
   page: PageRef,
   base: PublishedGraph,
   groups: { token: string; requires: string[] }[],
 ): () => void {
+  const heading = root.querySelector<HTMLElement>("[data-page-title]")!;
+  const safeTitle = heading.textContent!;
+  let persistenceFailed = false;
   const content = root.querySelector<HTMLElement>("#page-content")!;
   const buttons = [
     ...root.querySelectorAll<HTMLButtonElement>("button[data-work]"),
@@ -23,7 +27,14 @@ export function mountSpoilers(
   const cached = new Map<string, PublishedGraph>();
   function restore() {
     try {
-      allowed = readAllowed(window.sessionStorage);
+      allowed = persistenceFailed
+        ? new Set()
+        : readAllowed(window.sessionStorage);
+      if (!writeAllowed(window.sessionStorage, allowed)) {
+        allowed = new Set();
+        persistenceFailed = true;
+        storageNote.hidden = false;
+      }
     } catch {
       allowed = new Set();
     }
@@ -33,10 +44,20 @@ export function mountSpoilers(
     try {
       saved = writeAllowed(window.sessionStorage, allowed);
     } catch {}
+    persistenceFailed = !saved;
     storageNote.hidden = saved;
   }
   function render(graph: PublishedGraph) {
-    content.innerHTML = renderPageBody(projectPage(graph, page, allowed));
+    const view = projectPage(graph, page, allowed);
+    heading.textContent = graph.entities.some(
+      (e) =>
+        e.id === page.id &&
+        e.kind === page.kind &&
+        canView(e.spoilerWorkIds, allowed),
+    )
+      ? view.title
+      : safeTitle;
+    content.innerHTML = renderPageBody(view);
     for (const button of buttons) {
       const active = allowed.has(button.dataset.work!);
       const action = `ネタバレを${active ? "隠す" : "表示"}`;
@@ -56,18 +77,7 @@ export function mountSpoilers(
     }
   }
   function merge() {
-    const es = new Map(base.entities.map((e) => [key(e), e])),
-      ss = new Map(base.statements.map((s) => [s.id, s]));
-    for (const group of groups) {
-      if (!canView(group.requires, allowed)) continue;
-      const graph = cached.get(group.token);
-      if (!graph) continue;
-      for (const e of graph.entities)
-        if (canView(e.spoilerWorkIds, allowed)) es.set(key(e), e);
-      for (const s of graph.statements)
-        if (canView(s.spoilerWorkIds, allowed)) ss.set(s.id, s);
-    }
-    return { entities: [...es.values()], statements: [...ss.values()] };
+    return mergeVisibleGraph(base, groups, cached, allowed);
   }
   async function update() {
     const current = ++generation;

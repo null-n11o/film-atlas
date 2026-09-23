@@ -23,14 +23,12 @@ function publicPayload(e: Entity): PublicPayload {
     case "work":
       return {
         type: p.type,
-        jaTitle: p.jaTitle,
-        originalTitle: p.originalTitle,
         releaseYear: p.releaseYear,
       };
     case "background":
       return { type: p.type, category: p.category };
     case "person":
-      return { type: p.type, name: p.name, disambiguation: p.disambiguation };
+      return { type: p.type, disambiguation: p.disambiguation };
     case "place":
       return {
         type: p.type,

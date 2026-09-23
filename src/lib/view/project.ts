@@ -63,6 +63,13 @@ export function projectPage(
   };
   const evidenceIds = new Set<string>();
   for (const s of visible.filter((s) => key(s.owner) === key(page))) {
+    const quoteAsset = s.quote
+      ? index.get(`asset:${s.quote.assetId}`)?.payload
+      : null;
+    const credit =
+      quoteAsset?.type === "asset"
+        ? ` / 表示クレジット：${quoteAsset.attribution} / 作成者：${quoteAsset.creator} / 入手元：${quoteAsset.origin} / 利用条件：${quoteAsset.terms} / 改変：${quoteAsset.modified ? "あり" : "なし"}`
+        : "";
     view.blocks.push({
       id: s.id,
       kind: s.kind,
@@ -74,7 +81,7 @@ export function projectPage(
         .filter((x): x is PublicEntity => !!x)
         .map(label),
       quote: s.quote
-        ? `${s.quote.speaker} / ${s.quote.locator}${s.quote.translated ? " / 翻訳あり" : ""}`
+        ? `${s.quote.speaker} / ${s.quote.locator}${s.quote.translated ? " / 翻訳あり" : ""}${credit}`
         : null,
     });
     s.evidenceRefs.forEach((id) => evidenceIds.add(id));

@@ -290,5 +290,25 @@ export function makeDataset(): Dataset {
     { kind: "event", id: "e-secret" },
     "chronology",
   );
+  const guarded = entity(
+    "w3",
+    {
+      type: "work",
+      jaTitle: "SPOILER_FORMAL_TITLE",
+      originalTitle: "SPOILER_ORIGINAL_TITLE",
+      releaseYear: 2002,
+    },
+    "条件付きテスト作品",
+    "test-guarded-work",
+  );
+  guarded.spoilerWorkIds = ["w3"];
+  guarded.title = { text: "SPOILER_FORMAL_TITLE", spoilerWorkIds: ["w2"] };
+  data.entities.push(guarded);
+  addStatement(
+    data,
+    "guarded-body",
+    { kind: "work", id: "w3" },
+    "TEST_ONLY 条件付き本文",
+  );
   return data;
 }

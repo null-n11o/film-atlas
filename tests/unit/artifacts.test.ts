@@ -18,11 +18,15 @@ it("replaces previous data and refuses test data in production", async () => {
     work.status = "withdrawn";
     d.entities = d.entities.filter(
       (e) =>
+        e.id !== "w3" &&
+        e.id !== "ev-guarded-body" &&
         e.id !== "r-related" &&
         e.id !== "ev-r-related" &&
         e.id !== "ev-reason-r-related",
     );
-    d.statements = d.statements.filter((s) => s.id !== "reason-r-related");
+    d.statements = d.statements.filter(
+      (s) => !["reason-r-related", "guarded-body"].includes(s.id),
+    );
     await stagePublication(d, dir, "e2e");
     expect(await readFile(join(dir, "manifest.json"), "utf8")).not.toContain(
       "test-work-b",

@@ -6,9 +6,9 @@ import {
 } from "../content/schema";
 import type { PayloadGroup } from "../content/types";
 const publicPayload = z.union([
-  payloadSchema.options[0],
+  payloadSchema.options[0].omit({ jaTitle: true, originalTitle: true }),
   payloadSchema.options[1],
-  payloadSchema.options[2],
+  payloadSchema.options[2].omit({ name: true }),
   payloadSchema.options[3],
   payloadSchema.options[4],
   payloadSchema.options[5],
@@ -19,15 +19,15 @@ const publicPayload = z.union([
   }),
 ]);
 // Only markup emitted by the constrained Markdown renderer crosses this boundary.
-const html = z
-  .string()
-  .refine(
-    (value) =>
-      !/<(?!\/?(?:p|strong|em|ul|ol|li|blockquote|code|br)(?:\s*\/?>))[^>]*>/i.test(
-        value,
-      ),
-    "Unexpected HTML",
+const html = z.string().refine((value) => {
+  // Strip only complete, precisely allowed tokens. Any remaining opening angle
+  // bracket (including an unfinished tag) is rejected before innerHTML sees it.
+  const text = value.replace(
+    /<\/?(?:p|strong|em|ul|li|blockquote|code|ol)>|<ol start="[0-9]+">|<br\s*\/?>/g,
+    "",
   );
+  return !text.includes("<");
+}, "Unexpected HTML");
 const entity = z
   .strictObject(entitySchema.shape)
   .omit({ review: true, revision: true, status: true, payload: true })

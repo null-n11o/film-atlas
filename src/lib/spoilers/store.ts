@@ -20,7 +20,7 @@ export function readAllowed(storage: Pick<Storage, "getItem">): Set<string> {
   }
 }
 export function writeAllowed(
-  storage: Pick<Storage, "setItem">,
+  storage: Pick<Storage, "setItem"> & Partial<Pick<Storage, "removeItem">>,
   allowed: ReadonlySet<string>,
 ): boolean {
   try {
@@ -30,6 +30,10 @@ export function writeAllowed(
     );
     return true;
   } catch {
+    // A failed revoke must not leave an older allow-set to restore later.
+    try {
+      storage.removeItem?.(STORAGE_KEY);
+    } catch {}
     return false;
   }
 }
