@@ -31,5 +31,13 @@ export function makeDataset(): Dataset {
  addRelation(data,'r2',{kind:'background',id:'b1'},{kind:'place',id:'l1'},'location');
  addRelation(data,'r3',{kind:'background',id:'b1'},{kind:'event',id:'e1'},'chronology');
  addRelation(data,'r4',{kind:'person',id:'p1'},{kind:'work',id:'w1'},'participation');
+ addStatement(data,'spoiler-w1',{kind:'work',id:'w1'},'SPOILER_SENTINEL','depiction');
+ data.statements.at(-1)!.spoilerWorkIds=['w1'];
+ const source=entity('s-secret',{type:'source',author:'架空の発行者',url:null,bibliography:'架空の資料',accessedOn:'2026-09-23'},'SPOILER_SOURCE');source.spoilerWorkIds=['w1'];data.entities.push(source);
+ const ev=data.entities.find(x=>x.id==='ev-spoiler-w1')!;if(ev.payload.type==='evidence')ev.payload.sourceId='s-secret';
+ const place=entity('l-secret',{type:'place',space:'earth',worldId:null,coordinates:{lat:-20,lon:-100},period:'架空の検証時代',precision:'approximate',evidenceRefs:['ev-l-secret']},'SPOILER_PLACE');place.spoilerWorkIds=['w1'];data.entities.push(place);addEvidence(data,'ev-l-secret',{kind:'place',id:'l-secret'});
+ addRelation(data,'r-secret-place',{kind:'background',id:'b1'},{kind:'place',id:'l-secret'},'location');
+ addRelation(data,'r-related',{kind:'work',id:'w1'},{kind:'work',id:'w2'},'comparison');
+ const reason=data.statements.find(x=>x.id==='reason-r-related')!;reason.markdown='SPOILER_RELATED';reason.spoilerWorkIds=['w1','w2'];
  return data;
 }

@@ -1,0 +1,6 @@
+---
+import type {PageRef,PublicEntity} from '../lib/content/types';
+interface Props {page:PageRef;works:PublicEntity[]}
+const {page,works}=Astro.props;
+---
+<section class="spoiler-controls" aria-label="ネタバレの表示設定"><h2>読む範囲を選ぶ</h2><p>初めはネタバレを隠しています。作品ごとに切り替えられます。</p><div class="spoiler-buttons">{works.map(w=><button type="button" disabled data-work={w.id} data-label={page.kind==='work'&&w.id===page.id?'この作品':`${w.safeTitle}${w.payload.type==='work'?`（${w.payload.releaseYear}）`:''}`} aria-pressed="false" aria-controls="page-content">{page.kind==='work'&&w.id===page.id?'この作品':`${w.safeTitle}${w.payload.type==='work'?`（${w.payload.releaseYear}）`:''}`}のネタバレを表示</button>)}</div><p data-spoiler-status role="status" aria-live="polite"></p><p data-storage-note hidden>設定を保存できないため、このページだけに適用します。</p><button type="button" data-retry hidden>再試行</button></section>
