@@ -1,0 +1,15 @@
+---
+description: このリポの開発ハーネス選択（pstack / gstack / Superpowers）
+alwaysApply: true
+---
+
+# Coding harness
+
+このリポのデフォルトは **Superpowers**（計画→TDD→実装）。
+
+- brainstorm / writing-plans / TDD / verification の流れを優先
+- 出荷・デザイン・ブラウザQAが主目的のときだけ gstack
+- 深い並列実装・夜間ランが主目的のときだけ pstack（`/poteto-mode`）
+
+このリポでは `.claude/settings.json` で Superpowers を ON にする。
+3つを同時に常時適用しない。

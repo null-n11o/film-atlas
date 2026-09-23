@@ -12,7 +12,8 @@
 
 ## 開発ハーネス
 
-選択待ち。`/Users/nakanokentaro/.agents/harnesses/dev-harness/SKILL.md` の手順でユーザーが選択してから設定する。複数を同時に既定にしない。会社リポジトリの設定を変更しない。
+2026-09-23にユーザーがSuperpowersを選択。brainstormingで設計を整理し、設計確認後にwriting-plansで実装計画を作成する。Codexではスキル単体を使用する。
+仕様は `docs/superpowers/specs/`、実装計画は `docs/superpowers/plans/` に置く。複数のハーネスを同時に既定にせず、会社リポジトリの設定は変更しない。
 
 ## Commands
 
@@ -22,7 +23,7 @@
 
 ## Architecture
 
-未決定。開発要件・設計・実装計画の正本はこのリポジトリに置く。仕様の保存先は選択したハーネスに従う。会社の企画・判断・市場調査は01_kcpを参照し、本文を重複管理しない。
+技術構成は[詳細設計案](docs/superpowers/specs/2026-09-23-film-atlas-design.md)で提案し、レビュー待ち。開発要件・設計・実装計画の正本はこのリポジトリに置く。会社の企画・判断・市場調査は01_kcpを参照し、本文を重複管理しない。
 
 ## Working rules
 

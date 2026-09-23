@@ -11,11 +11,12 @@
 3. [上位PLANの参照コピー](docs/2026/09/PLAN-20260923-300-film-atlas.md)
 4. [初期版の要求案](docs/2026/09/requirements.md)
 5. [作業規約](AGENTS.md)
+6. [初期版の詳細設計案](docs/superpowers/specs/2026-09-23-film-atlas-design.md)
 
 継続作業は[Notion Task](https://app.notion.com/p/3e4208bc20a38161b0eed4673bd5de2e)を参照する。資料中の個人ディレクトリへのリンクはローカル環境向け。
 
 ## 開発準備
 
-開発ハーネスは選択待ち。選択後に仕様・実装計画を作成し、CEOレビューを経て実装する。仕様の提案を確定事項へ読み替えない。
+開発ハーネスは2026-09-23にSuperpowersを選択した。1作品を完成させてから追加する方針で詳細設計案を作成し、レビュー待ち。設計確認後に `docs/superpowers/plans/` へ実装計画を作成し、CEOレビューを経て実装する。仕様の提案を確定事項へ読み替えない。
 
 Gitのリモートは未設定。公開先・ドメイン・note記事のURLは未確定。
