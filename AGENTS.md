@@ -1,6 +1,6 @@
 # film-atlas
 
-映画を入口に歴史・文化・制作・人物の背景を知るWebサービス。現在は開発準備段階。
+映画を入口に歴史・文化・制作・人物の背景を知るWebサービス。作品選定に依存しない機能を実装中。実コンテンツの制作は未着手。
 
 ## 読む順序
 
@@ -17,13 +17,21 @@
 
 ## Commands
 
-実装前のためアプリの起動・テスト・ビルドコマンドは未定。導入後に実行確認したコマンドだけを記載する。
+Node.js 22.22.3。実行確認したコマンド：
+
+- `npm run dev`：原稿を検証してローカル起動。
+- `npm run check`：Astro・TypeScriptの型検査。
+- `npm test`：単体・隔離ビルド検証。
+- `npm run validate:content`：内容の参照・公開条件の検証。
+- `npm run build`：通常成果物をdistへ生成。
+- `npm run build:e2e`：架空資料を.runtime/e2e-distへ生成。
+- `npm run test:e2e`：Chromium・WebKitでブラウザー検証。
 
 文書変更はリンク、合意と提案の区分、`git diff --check` を確認する。アプリのテストを実行したとは記録しない。
 
 ## Architecture
 
-[詳細設計](docs/superpowers/specs/2026-09-23-film-atlas-design.md)は2026-09-23に承認済み。[実装計画](docs/superpowers/plans/2026-09-23-film-atlas.md)はレビュー待ち。開発要件・設計・実装計画の正本はこのリポジトリに置く。会社の企画・判断・市場調査は01_kcpを参照し、本文を重複管理しない。
+[詳細設計](docs/superpowers/specs/2026-09-23-film-atlas-design.md)は2026-09-23に承認済み。[実装計画](docs/superpowers/plans/2026-09-23-film-atlas.md)は同日に承認済み。NativeでTask 1〜7を順次実装し、最後に独立レビューを行う。開発要件・設計・実装計画の正本はこのリポジトリに置く。会社の企画・判断・市場調査は01_kcpを参照し、本文を重複管理しない。
 
 ## Working rules
 

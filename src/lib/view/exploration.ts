@@ -1,22 +1,120 @@
-import {projectMap} from '../map/project';
-import {orderEvents} from '../timeline/order';
-import {escapeHtml as esc} from './render';
-import type {PageView} from './types';
-import type {PublicEntity} from '../content/types';
-const key=(e:PublicEntity)=>`${e.kind}:${e.id}`;
-const links=(view:PageView,e:PublicEntity)=>(view.contextLinks[key(e)]??[]).map(l=>`<a href="${esc(l.href)}">${esc(l.label)}へ</a>`).join(' ');
-function references(view:PageView,e:PublicEntity){const p=e.payload;if(p.type!=='place'&&p.type!=='event')return '';return p.evidenceRefs.map(id=>{const i=view.references.findIndex(r=>r.id===id);return i<0?'':`<a class="citation" href="#evidence-${esc(id)}">出典${i+1}</a>`;}).join(' ');}
-export function renderPlaceMap(view:PageView){
- const points=view.places.flatMap(e=>e.payload.type==='place'&&e.payload.space==='earth'&&e.payload.coordinates?[{id:e.id,...e.payload.coordinates}]:[]);if(!points.length)return '';
- const map=projectMap(points);const names=new Map(view.places.map(e=>[e.id,e.title.text]));
- return `<div class="map-frame"><svg data-map data-bounds="${esc(JSON.stringify(map.bounds))}" viewBox="0 0 1000 500" role="group" aria-label="位置関係の概略図"><title>位置関係の概略図</title><rect width="1000" height="500" fill="#edf1e9"/>${[.25,.5,.75].map(t=>`<path d="M ${40+t*920} 40 V 460 M 40 ${40+t*420} H 960" stroke="#c9d0c8" fill="none"/>`).join('')}<text x="40" y="25" font-size="20">北</text>${map.groups.map((g,i)=>`<g role="button" tabindex="0" data-map-group="${i}" data-place-ids="${esc(g.ids.join(' '))}" aria-pressed="false" aria-label="場所を選択：${esc(g.ids.map(id=>names.get(id)).join('・'))}"><circle cx="${g.x}" cy="${g.y}" r="26" fill="#275943"/><text x="${g.x}" y="${g.y+8}" fill="white" text-anchor="middle" font-size="23">${i+1}</text><title>${esc(g.ids.map(id=>names.get(id)).join('・'))}</title></g>`).join('')}</svg><ol class="map-legend">${map.groups.map((g,i)=>`<li>${i+1} · ${esc(g.ids.map(id=>names.get(id)).join('・'))}</li>`).join('')}</ol><p class="meta">位置関係の概略図です。国境や当時の領域を復元したものではありません。</p><div data-selected-places aria-live="polite"></div></div>`;
+import { projectMap } from "../map/project";
+import { orderEvents } from "../timeline/order";
+import { escapeHtml as esc } from "./render";
+import type { PageView } from "./types";
+import type { PublicEntity } from "../content/types";
+const key = (e: PublicEntity) => `${e.kind}:${e.id}`;
+const links = (view: PageView, e: PublicEntity) =>
+  (view.contextLinks[key(e)] ?? [])
+    .map((l) => `<a href="${esc(l.href)}">${esc(l.label)}へ</a>`)
+    .join(" ");
+function references(view: PageView, e: PublicEntity) {
+  const p = e.payload;
+  if (p.type !== "place" && p.type !== "event") return "";
+  return p.evidenceRefs
+    .map((id) => {
+      const i = view.references.findIndex((r) => r.id === id);
+      return i < 0
+        ? ""
+        : `<a class="citation" href="#evidence-${esc(id)}">出典${i + 1}</a>`;
+    })
+    .join(" ");
 }
-export function renderPlaceList(view:PageView){
- const groups=new Map<string,PublicEntity[]>();for(const e of view.places){const p=e.payload;if(p.type!=='place')continue;const group=p.space==='fiction'?`架空世界：${p.worldId}`:p.coordinates?'実在する場所':'位置不明の場所';groups.set(group,[...(groups.get(group)??[]),e]);}
- return [...groups].map(([heading,items])=>`<h3>${esc(heading)}</h3><ul class="place-list">${items.map(e=>{const p=e.payload;if(p.type!=='place')return '';return `<li id="place-${esc(e.id)}"><h4>${esc(e.title.text)}</h4><p>${esc(p.period)} · 位置：${{exact:'確認済み',approximate:'概算',unknown:'不明'}[p.precision]}</p>${links(view,e)}<div>${references(view,e)}</div></li>`;}).join('')}</ul>`).join('');
+export function renderPlaceMap(view: PageView) {
+  const points = view.places.flatMap((e) =>
+    e.payload.type === "place" &&
+    e.payload.space === "earth" &&
+    e.payload.coordinates
+      ? [{ id: e.id, ...e.payload.coordinates }]
+      : [],
+  );
+  if (!points.length) return "";
+  const map = projectMap(points);
+  const names = new Map(view.places.map((e) => [e.id, e.title.text]));
+  const pins = map.groups
+    .map(
+      (g, i) =>
+        `<button type="button" class="map-pin" style="left:${g.x / 10}%;top:${g.y / 5}%" data-map-group="${i}" data-place-ids="${esc(g.ids.join(" "))}" aria-pressed="false" aria-label="場所を選択：${esc(g.ids.map((id) => names.get(id)).join("・"))}">${i + 1}</button>`,
+    )
+    .join("");
+  return `<div class="map-frame"><div class="map-canvas"><svg data-map data-bounds="${esc(JSON.stringify(map.bounds))}" viewBox="0 0 1000 500" role="img" aria-label="位置関係の概略図"><title>位置関係の概略図</title><rect width="1000" height="500" fill="#edf1e9"/>${[0.25, 0.5, 0.75].map((t) => `<path d="M ${40 + t * 920} 40 V 460 M 40 ${40 + t * 420} H 960" stroke="#c9d0c8" fill="none"/>`).join("")}<text x="40" y="25" font-size="20">北</text></svg>${pins}</div><ol class="map-legend">${map.groups.map((g, i) => `<li>${i + 1} · ${esc(g.ids.map((id) => names.get(id)).join("・"))}</li>`).join("")}</ol><p class="meta">位置関係の概略図です。国境や当時の領域を復元したものではありません。</p><div data-selected-places aria-live="polite"></div></div>`;
 }
-export function renderTimeline(view:PageView){if(!view.events.length)return '';return `<section id="timeline"><h2>時代をたどる</h2>${orderEvents(view.events).map(group=>{const [domain,world,unknown]=group.key.split(':');const title=({history:'史実',story:'劇中の年代',release:'公開年'} as Record<string,string>)[domain];return `<h3>${title}${world==='earth'?'':` · ${esc(world)}`}${unknown?' · 年代不明':''}</h3><ol class="timeline">${group.items.map(e=>{const p=e.payload;if(p.type!=='event')return '';return `<li><p class="event-date">${esc(p.dateLabel)} <span class="meta">${{exact:'確定',approximate:'概算',range:'範囲',unknown:'不明'}[p.certainty]}</span></p><h4>${esc(e.title.text)}</h4>${links(view,e)}<div>${references(view,e)}</div></li>`;}).join('')}</ol>`;}).join('')}</section>`;}
-export function mountMap(root:HTMLElement):()=>void{
- function select(event:Event){const target=(event.target as Element).closest<SVGGElement>('[data-map-group]');if(!target||!root.contains(target))return;if(event instanceof KeyboardEvent&&!['Enter',' '].includes(event.key))return;event.preventDefault();for(const pin of root.querySelectorAll('[data-map-group]'))pin.setAttribute('aria-pressed',String(pin===target));const selected=root.querySelector('[data-selected-places]');if(!selected)return;selected.replaceChildren();for(const id of target.dataset.placeIds!.split(' ')){const item=root.querySelector(`#place-${CSS.escape(id)}`);if(item){const copy=item.cloneNode(true) as HTMLElement;copy.removeAttribute('id');const list=document.createElement('ul');list.append(copy);selected.append(list);}}}
- root.addEventListener('click',select);root.addEventListener('keydown',select);return ()=>{root.removeEventListener('click',select);root.removeEventListener('keydown',select);};
+export function renderPlaceList(view: PageView) {
+  const groups = new Map<string, PublicEntity[]>();
+  for (const e of view.places) {
+    const p = e.payload;
+    if (p.type !== "place") continue;
+    const group =
+      p.space === "fiction"
+        ? `架空世界：${p.worldId}`
+        : p.coordinates
+          ? "実在する場所"
+          : "位置不明の場所";
+    groups.set(group, [...(groups.get(group) ?? []), e]);
+  }
+  return [...groups]
+    .map(
+      ([heading, items]) =>
+        `<h3>${esc(heading)}</h3><ul class="place-list">${items
+          .map((e) => {
+            const p = e.payload;
+            if (p.type !== "place") return "";
+            return `<li id="place-${esc(e.id)}"><h4>${esc(e.title.text)}</h4><p>${esc(p.period)} · 位置：${{ exact: "確認済み", approximate: "概算", unknown: "不明" }[p.precision]}</p>${links(view, e)}<div>${references(view, e)}</div></li>`;
+          })
+          .join("")}</ul>`,
+    )
+    .join("");
+}
+export function renderTimeline(view: PageView) {
+  if (!view.events.length) return "";
+  return `<section id="timeline"><h2>時代をたどる</h2>${orderEvents(view.events)
+    .map((group) => {
+      const [domain, world, unknown] = group.key.split(":");
+      const title = (
+        { history: "史実", story: "劇中の年代", release: "公開年" } as Record<
+          string,
+          string
+        >
+      )[domain];
+      return `<h3>${title}${world === "earth" ? "" : ` · ${esc(world)}`}${unknown ? " · 年代不明" : ""}</h3><ol class="timeline">${group.items
+        .map((e) => {
+          const p = e.payload;
+          if (p.type !== "event") return "";
+          return `<li><p class="event-date">${esc(p.dateLabel)} <span class="meta">${{ exact: "確定", approximate: "概算", range: "範囲", unknown: "不明" }[p.certainty]}</span></p><h4>${esc(e.title.text)}</h4>${links(view, e)}<div>${references(view, e)}</div></li>`;
+        })
+        .join("")}</ol>`;
+    })
+    .join("")}</section>`;
+}
+export function mountMap(root: HTMLElement): () => void {
+  function select(event: Event) {
+    const target = (event.target as Element).closest<HTMLButtonElement>(
+      "[data-map-group]",
+    );
+    if (!target || !root.contains(target)) return;
+    if (event instanceof KeyboardEvent && !["Enter", " "].includes(event.key))
+      return;
+    event.preventDefault();
+    for (const pin of root.querySelectorAll("[data-map-group]"))
+      pin.setAttribute("aria-pressed", String(pin === target));
+    const selected = root.querySelector("[data-selected-places]");
+    if (!selected) return;
+    selected.replaceChildren();
+    for (const id of target.dataset.placeIds!.split(" ")) {
+      const item = root.querySelector(`#place-${CSS.escape(id)}`);
+      if (item) {
+        const copy = item.cloneNode(true) as HTMLElement;
+        copy.removeAttribute("id");
+        const list = document.createElement("ul");
+        list.append(copy);
+        selected.append(list);
+      }
+    }
+  }
+  root.addEventListener("click", select);
+  root.addEventListener("keydown", select);
+  return () => {
+    root.removeEventListener("click", select);
+    root.removeEventListener("keydown", select);
+  };
 }

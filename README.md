@@ -2,7 +2,7 @@
 
 映画を入口に歴史・文化と制作・人物の背景を知るWebサービス。開発実績、実利用、個人noteを通じたKCP認知を目指す。
 
-現在は開発準備段階。実装コードと実行コマンドはまだない。詳細設計は承認済みで、正式名称・初期対象作品は未確定。
+作品選定に依存しない機能を実装中。詳細設計と実装計画は承認済み。正式名称・初期対象作品・人による内容確認担当は未確定で、実コンテンツはまだ掲載していない。
 
 ## 読む順序
 
@@ -16,8 +16,21 @@
 
 継続作業は[Notion Task](https://app.notion.com/p/3e4208bc20a38161b0eed4673bd5de2e)を参照する。資料中の個人ディレクトリへのリンクはローカル環境向け。
 
-## 開発準備
+## 開発と検証
 
-開発ハーネスは2026-09-23にSuperpowersを選択した。1作品を完成させてから追加する方針で詳細設計を承認済み。実装計画を作成し、レビューと実行方法の選択を待っている。対象作品と本数は未確定。CEOレビュー後に実装する。
+Node.jsは.nvmrc、依存関係はpackage-lock.jsonで固定する。初回はnpm ciとnpx playwright install chromium webkitを実行する。
 
-Gitのoriginは `https://github.com/null-n11o/film-atlas.git`。公開先・ドメイン・note記事のURLは未確定。
+```sh
+npm run dev              # 原稿を検証してローカル起動
+npm run check            # AstroとTypeScriptの型検査
+npm test                 # 単体・隔離ビルド検証
+npm run validate:content # 原稿の参照・公開条件
+npm run build            # contentだけからdistへ生成
+npm run test:e2e          # テスト専用ビルドをChromium・WebKitで検証
+```
+
+画面検証用の架空資料はtests/fixturesに置く。npm run build:e2eの出力.runtime/e2e-distはテスト専用であり、公開対象にしない。通常ビルドは実コンテンツ未投入のため空の作品一覧になる。直接astro buildを呼ぶと検証前の生成を拒否する。
+
+[画面方針](DESIGN.md)と[実装検証記録](docs/verification/implementation.md)を参照する。開発ハーネスはSuperpowers、実行方法はNative。最初の1作品を人が確認して受け入れてから追加する。
+
+Gitのoriginはhttps://github.com/null-n11o/film-atlas.git。公開先・ドメイン・note URLは未確定。公開時は追加JSONへのX-Robots-Tag: noindexと古い成果物の置換を確認する。マージや公開は明示依頼後に行う。

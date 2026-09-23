@@ -1,7 +1,50 @@
-import {expect,it} from 'vitest';
-import { publish } from '../../src/lib/content/publish';
-import {makeDataset,entity} from '../fixtures/make-dataset';
-it('separates spoiler statements, evidence and private notes',()=>{const d=makeDataset();d.statements[0].spoilerWorkIds=['w1'];d.statements[0].markdown='SPOILER_SENTINEL';const p=publish(d);expect(JSON.stringify(p.base)).not.toContain('SPOILER_SENTINEL');expect(JSON.stringify(p.groups)).toContain('SPOILER_SENTINEL');expect(JSON.stringify(p)).not.toContain('PRIVATE_REVIEW_NOTE');});
-it('inherits owner/source/relationship requirements without hiding the safe work',()=>{const d=makeDataset();d.entities.find(x=>x.id==='s1')!.spoilerWorkIds=['w2'];d.statements[0].spoilerWorkIds=['w1'];const p=publish(d);expect(p.base.entities.some(x=>x.id==='w1')).toBe(true);expect(p.groups.find(x=>x.graph.statements.some(s=>s.id==='st1'))!.requires).toEqual(['w1','w2']);});
-it('safe title remains in base, formal title is gated',()=>{const d=makeDataset();d.entities[0].title={text:'SPOILER_TITLE',spoilerWorkIds:['w1']};const p=publish(d);expect(JSON.stringify(p.base)).not.toContain('SPOILER_TITLE');expect(p.groups.some(x=>x.graph.entities.some(e=>e.title.text==='SPOILER_TITLE'))).toBe(true);});
-it('excludes drafts and withdrawn and rejects stale reviews',()=>{const d=makeDataset();const e=entity('draft',{type:'person',name:'PRIVATE_DRAFT',disambiguation:''},'PRIVATE_DRAFT','draft');e.status='draft';d.entities.push(e);expect(JSON.stringify(publish(d))).not.toContain('PRIVATE_DRAFT');e.status='withdrawn';expect(JSON.stringify(publish(d))).not.toContain('PRIVATE_DRAFT');d.entities[0].revision++;expect(()=>publish(d)).toThrow('STALE_REVIEW');});
+import { expect, it } from "vitest";
+import { publish } from "../../src/lib/content/publish";
+import { makeDataset, entity } from "../fixtures/make-dataset";
+it("separates spoiler statements, evidence and private notes", () => {
+  const d = makeDataset();
+  d.statements[0].spoilerWorkIds = ["w1"];
+  d.statements[0].markdown = "SPOILER_SENTINEL";
+  const p = publish(d);
+  expect(JSON.stringify(p.base)).not.toContain("SPOILER_SENTINEL");
+  expect(JSON.stringify(p.groups)).toContain("SPOILER_SENTINEL");
+  expect(JSON.stringify(p)).not.toContain("PRIVATE_REVIEW_NOTE");
+});
+it("inherits owner/source/relationship requirements without hiding the safe work", () => {
+  const d = makeDataset();
+  d.entities.find((x) => x.id === "s1")!.spoilerWorkIds = ["w2"];
+  d.statements[0].spoilerWorkIds = ["w1"];
+  const p = publish(d);
+  expect(p.base.entities.some((x) => x.id === "w1")).toBe(true);
+  expect(
+    p.groups.find((x) => x.graph.statements.some((s) => s.id === "st1"))!
+      .requires,
+  ).toEqual(["w1", "w2"]);
+});
+it("safe title remains in base, formal title is gated", () => {
+  const d = makeDataset();
+  d.entities[0].title = { text: "SPOILER_TITLE", spoilerWorkIds: ["w1"] };
+  const p = publish(d);
+  expect(JSON.stringify(p.base)).not.toContain("SPOILER_TITLE");
+  expect(
+    p.groups.some((x) =>
+      x.graph.entities.some((e) => e.title.text === "SPOILER_TITLE"),
+    ),
+  ).toBe(true);
+});
+it("excludes drafts and withdrawn and rejects stale reviews", () => {
+  const d = makeDataset();
+  const e = entity(
+    "draft",
+    { type: "person", name: "PRIVATE_DRAFT", disambiguation: "" },
+    "PRIVATE_DRAFT",
+    "draft",
+  );
+  e.status = "draft";
+  d.entities.push(e);
+  expect(JSON.stringify(publish(d))).not.toContain("PRIVATE_DRAFT");
+  e.status = "withdrawn";
+  expect(JSON.stringify(publish(d))).not.toContain("PRIVATE_DRAFT");
+  d.entities[0].revision++;
+  expect(() => publish(d)).toThrow("STALE_REVIEW");
+});
