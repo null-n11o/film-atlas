@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+import Content from './Content.astro';
+import {manifest} from '../lib/content/manifest';
+import {projectPage} from '../lib/view/project';
+import type {PublicEntity,PageRef} from '../lib/content/types';
+interface Props {entity:PublicEntity}
+const {entity}=Astro.props;
+const page={kind:entity.kind,id:entity.id} as PageRef;
+const view=projectPage(manifest().base,page,new Set());
+const category={work:'作品と背景',background:'背景解説',person:'人物と作品'}[page.kind];
+---
+<Base title={entity.safeTitle} summary={entity.safeSummary}><div class="reading-layout"><header class="page-intro"><a class="back-link" href="/">作品一覧へ戻る</a><p class="eyebrow">{category}</p><h1>{entity.safeTitle}</h1>{entity.payload.type==='work'&&<p class="meta">{entity.payload.releaseYear}年公開</p>}<p class="lead">{entity.safeSummary}</p><p class="editorial-note">記述の区分と出典を確認しながらお読みいただけます。</p></header><Content view={view}/></div></Base>

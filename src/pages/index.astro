@@ -1,0 +1,7 @@
+---
+import Base from '../layouts/Base.astro';
+import {manifest} from '../lib/content/manifest';
+import {href,label} from '../lib/view/project';
+const works=manifest().base.entities.filter(e=>e.kind==='work');
+---
+<Base title="作品一覧"><div class="intro"><p class="eyebrow">FILM / CONTEXT / CONNECTION</p><h1>映画の向こうにある、<br/>背景を読む。</h1><p>歴史や文化、作り手の言葉。<br/>作品との接点を、出典とともにたどります。</p></div><section class="catalog"><div class="section-heading"><h2>作品一覧</h2><span class="meta">公開年から作品を選ぶ</span></div>{works.length?<ol class="work-list">{works.map((e,i)=><li><span class="index-number">{String(i+1).padStart(2,'0')}</span><div><p class="meta">{e.payload.type==='work'&&`${e.payload.releaseYear}年公開`}</p><h3><a href={href(e)!}>{label(e)}</a></h3><p>{e.safeSummary}</p></div><span class="list-arrow" aria-hidden="true">↗</span></li>)}</ol>:<div class="empty-state"><h3>作品の掲載を準備しています</h3><p>出典と内容の確認を終えた作品から、順に掲載します。</p></div>}</section></Base>

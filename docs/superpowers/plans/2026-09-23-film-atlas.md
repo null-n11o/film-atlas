@@ -8,9 +8,9 @@
 
 **Tech Stack:** Node.js 22.22.3、npm 10.9.8、Astro 7.3.4、TypeScript 5.9.3、Zod 4.6.5、Vitest 5.0.1、Playwright 1.63.0、通常のCSS。
 
-**Spec:** [承認済み詳細設計](../specs/2026-09-23-film-atlas-design.md)。2026-09-23のユーザー「OKです」は設計承認と実装計画作成への合意であり、本計画の実行承認とは区別する。
+**Spec:** [承認済み詳細設計](../specs/2026-09-23-film-atlas-design.md)。2026-09-23のユーザー「OKです」は設計承認と実装計画作成への合意であり、本計画の実行は同日の開発再開依頼で別途承認された。
 
-状態：実装計画のレビュー待ち。以下のコードとコマンドは実装時の指示であり、作成・実行済みのアプリではない。
+状態：2026-09-23にユーザーが詳細設計・実装計画とNative実行を承認。Task 1〜7を順次実装し、最後に独立レビューする。Task 8の実コンテンツ制作は作品と確認担当の決定後に進める。
 
 ## Global Constraints
 
@@ -284,6 +284,8 @@ astro.configは `output: 'static'`。Astroが読むmanifestはbuildSiteが固定
 - [ ] 対象ファイルを `feat: generate reviewed public content only` でコミットする。
 
 ## Task 4：安全な初期ページと出典の動線
+
+画面実装前に[画面方針](../../../DESIGN.md)を記録済み。配色、文字組み、余白、共通部品、モバイル表示を同書に従って実装し、Task 7で代表3画面のPC・スマートフォン画像を確認する。
 
 **Files:** Create `src/lib/view/{types,project,render}.ts`, `src/layouts/Base.astro`, `src/components/{Content,References,WorkLinks}.astro`, `src/pages/index.astro`, `src/pages/works/[slug].astro`, `src/pages/backgrounds/[slug].astro`, `src/pages/people/[slug].astro`, `src/pages/about.astro`, `src/pages/404.astro`, `src/styles/global.css`, `src/site.ts`, `playwright.config.ts`, `tests/e2e/reading.spec.ts`, `tests/unit/view.test.ts`。
 
