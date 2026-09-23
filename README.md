@@ -16,12 +16,19 @@ Task 1〜7は実装済み。詳細設計と実装計画は承認済み。最初�
 
 継続作業は[Notion Task](https://app.notion.com/p/3e4208bc20a38161b0eed4673bd5de2e)を参照する。資料中の個人ディレクトリへのリンクはローカル環境向け。
 
+## 原稿を画面で確認する
+
+リポジトリ直下で `npm run review:content` を実行し、[下書きの確認画面](http://127.0.0.1:4326/)を開く。『オデュッセイア』から本文・背景・人物・地図・年表・出典を確認できる。原稿を編集したらコマンドを再起動する。
+
+`npm run dev` は内容確認済みの掲載対象を表示するため、下書きだけの段階では作品一覧が空になる。
+
 ## 開発と検証
 
 Node.jsは.nvmrc、依存関係はpackage-lock.jsonで固定する。初回はnpm ciとnpx playwright install chromium webkitを実行する。
 
 ```sh
 npm run dev              # 原稿を検証してローカル起動
+npm run review:content   # 内容確認前の原稿をローカル表示（4326番）
 npm run check            # AstroとTypeScriptの型検査
 npm test                 # 単体・隔離ビルド検証
 npm run validate:content # 原稿の参照・公開条件

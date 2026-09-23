@@ -20,6 +20,7 @@
 Node.js 22.22.3。実行確認したコマンド：
 
 - `npm run dev`：原稿を検証してローカル起動。
+- `npm run review:content`：下書きの確認画面を127.0.0.1:4326で起動。
 - `npm run check`：Astro・TypeScriptの型検査。
 - `npm test`：単体・隔離ビルド検証。
 - `npm run validate:content`：内容の参照・公開条件の検証。
