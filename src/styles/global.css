@@ -166,6 +166,7 @@ main {
   font-family: Georgia, serif;
   color: var(--muted);
   font-size: 1.35rem;
+  white-space: nowrap;
 }
 .list-arrow {
   font-size: 1.4rem;
@@ -338,7 +339,7 @@ svg {
     padding-bottom: 12px;
   }
   .work-list > li {
-    grid-template-columns: 28px minmax(0, 1fr);
+    grid-template-columns: minmax(28px, max-content) minmax(0, 1fr);
     gap: 16px;
     padding: 24px 0;
   }
