@@ -66,10 +66,11 @@ test("skip link, keyboard controls and 200% text scaling remain reachable", asyn
     page.getByText("SPOILER_SENTINEL", { exact: true }),
   ).toBeVisible();
 });
-test("rendered pages make no external requests", async ({ page }) => {
+test("rendered pages make no external requests", async ({ page, baseURL }) => {
+  const origin = new URL(baseURL!).origin;
   const external: string[] = [];
   page.on("request", (r) => {
-    if (!r.url().startsWith("http://127.0.0.1:4322/")) external.push(r.url());
+    if (new URL(r.url()).origin !== origin) external.push(r.url());
   });
   for (const path of [
     "/",
