@@ -1,0 +1,19 @@
+{
+  "id": "homer-war-and-homecoming",
+  "revision": 1,
+  "status": "draft",
+  "review": null,
+  "spoilerWorkIds": [],
+  "kind": "background",
+  "slug": "homer-war-and-homecoming",
+  "safeTitle": "トロイア戦争と帰郷の叙事詩",
+  "safeSummary": "『イリアス』と『オデュッセイア』の違い、叙事詩が位置づけられる時代、トロイア遺跡を読む。",
+  "title": {
+    "text": "トロイア戦争と帰郷の叙事詩",
+    "spoilerWorkIds": []
+  },
+  "payload": {
+    "type": "background",
+    "category": "culture"
+  }
+}

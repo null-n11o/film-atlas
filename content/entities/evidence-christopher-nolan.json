@@ -1,0 +1,26 @@
+{
+  "id": "evidence-christopher-nolan",
+  "revision": 1,
+  "status": "draft",
+  "review": null,
+  "spoilerWorkIds": [],
+  "kind": "evidence",
+  "slug": null,
+  "safeTitle": "根拠：christopher-nolan",
+  "safeSummary": "記述と資料の対応。",
+  "title": {
+    "text": "根拠：christopher-nolan",
+    "spoilerWorkIds": []
+  },
+  "payload": {
+    "type": "evidence",
+    "sourceId": "source-odyssey-universal",
+    "target": {
+      "kind": "person",
+      "id": "christopher-nolan"
+    },
+    "locator": "Directed by、Written by、Produced by",
+    "verificationNote": "AI調査メモ（人による確認前）：人物名・識別用補足・安全な概要の根拠。",
+    "support": "fact"
+  }
+}

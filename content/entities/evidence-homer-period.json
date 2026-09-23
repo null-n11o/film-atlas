@@ -1,0 +1,26 @@
+{
+  "id": "evidence-homer-period",
+  "revision": 1,
+  "status": "draft",
+  "review": null,
+  "spoilerWorkIds": [],
+  "kind": "evidence",
+  "slug": null,
+  "safeTitle": "根拠：homer-period",
+  "safeSummary": "記述と資料の対応。",
+  "title": {
+    "text": "根拠：homer-period",
+    "spoilerWorkIds": []
+  },
+  "payload": {
+    "type": "evidence",
+    "sourceId": "source-homer-met",
+    "target": {
+      "kind": "content-statement",
+      "id": "homer-period"
+    },
+    "locator": "本文第1段落の幾何学様式期と第3段落のホメロスの時代",
+    "verificationNote": "AI調査メモ（人による確認前）：文学史上の時代と物語内の出来事の年代を区別。原典の成立年を単年で確定しない。",
+    "support": "fact"
+  }
+}

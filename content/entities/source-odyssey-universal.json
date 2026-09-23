@@ -1,0 +1,22 @@
+{
+  "id": "source-odyssey-universal",
+  "revision": 1,
+  "status": "draft",
+  "review": null,
+  "spoilerWorkIds": [],
+  "kind": "source",
+  "slug": null,
+  "safeTitle": "THE ODYSSEY — 作品情報",
+  "safeSummary": "原稿の根拠資料。人による内容確認は未完了。",
+  "title": {
+    "text": "THE ODYSSEY — 作品情報",
+    "spoilerWorkIds": []
+  },
+  "payload": {
+    "type": "source",
+    "author": "Universal Pictures Canada",
+    "url": "https://universalpictures.ca/movie/the-odyssey/",
+    "bibliography": "作品紹介、Directed by、Written by、Produced by。2026年7月17日は同地域の公開日。",
+    "accessedOn": "2026-09-23"
+  }
+}

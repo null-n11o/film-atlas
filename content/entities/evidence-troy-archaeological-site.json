@@ -1,0 +1,26 @@
+{
+  "id": "evidence-troy-archaeological-site",
+  "revision": 1,
+  "status": "draft",
+  "review": null,
+  "spoilerWorkIds": [],
+  "kind": "evidence",
+  "slug": null,
+  "safeTitle": "根拠：troy-archaeological-site",
+  "safeSummary": "記述と資料の対応。",
+  "title": {
+    "text": "根拠：troy-archaeological-site",
+    "spoilerWorkIds": []
+  },
+  "payload": {
+    "type": "evidence",
+    "sourceId": "source-troy-unesco",
+    "target": {
+      "kind": "place",
+      "id": "troy-archaeological-site"
+    },
+    "locator": "Brief synthesisのHisarlık所在地説明、座標欄 N39 57 23.184 E26 14 20.4",
+    "verificationNote": "AI調査メモ（人による確認前）：度分秒を39.95644、26.239へ変換。遺跡全体の代表点であり、映画の撮影地点や個別場面の場所ではない。",
+    "support": "fact"
+  }
+}

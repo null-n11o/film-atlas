@@ -1,0 +1,22 @@
+{
+  "id": "source-homer-met",
+  "revision": 1,
+  "status": "draft",
+  "review": null,
+  "spoilerWorkIds": [],
+  "kind": "source",
+  "slug": null,
+  "safeTitle": "Geometric Art in Ancient Greece",
+  "safeSummary": "原稿の根拠資料。人による内容確認は未完了。",
+  "title": {
+    "text": "Geometric Art in Ancient Greece",
+    "spoilerWorkIds": []
+  },
+  "payload": {
+    "type": "source",
+    "author": "The Metropolitan Museum of Art, Department of Greek and Roman Art",
+    "url": "https://www.metmuseum.org/essays/geometric-art-in-ancient-greece",
+    "bibliography": "2004年10月1日。本文第1・3段落。",
+    "accessedOn": "2026-09-23"
+  }
+}

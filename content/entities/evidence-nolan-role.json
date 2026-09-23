@@ -1,0 +1,26 @@
+{
+  "id": "evidence-nolan-role",
+  "revision": 1,
+  "status": "draft",
+  "review": null,
+  "spoilerWorkIds": [],
+  "kind": "evidence",
+  "slug": null,
+  "safeTitle": "根拠：nolan-role",
+  "safeSummary": "記述と資料の対応。",
+  "title": {
+    "text": "根拠：nolan-role",
+    "spoilerWorkIds": []
+  },
+  "payload": {
+    "type": "evidence",
+    "sourceId": "source-odyssey-universal",
+    "target": {
+      "kind": "content-statement",
+      "id": "nolan-role"
+    },
+    "locator": "Directed by、Written by、Produced by、製作会社Syncopyの説明",
+    "verificationNote": "AI調査メモ（人による確認前）：資料の該当箇所を参照して要約。",
+    "support": "fact"
+  }
+}

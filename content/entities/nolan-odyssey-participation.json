@@ -1,0 +1,33 @@
+{
+  "id": "nolan-odyssey-participation",
+  "revision": 1,
+  "status": "draft",
+  "review": null,
+  "spoilerWorkIds": [],
+  "kind": "relation",
+  "slug": null,
+  "safeTitle": "接点：nolan-odyssey-participation",
+  "safeSummary": "ノーランが監督・脚本・製作を担当している。",
+  "title": {
+    "text": "接点：nolan-odyssey-participation",
+    "spoilerWorkIds": []
+  },
+  "payload": {
+    "type": "relation",
+    "from": {
+      "kind": "person",
+      "id": "christopher-nolan"
+    },
+    "to": {
+      "kind": "work",
+      "id": "odyssey-2026"
+    },
+    "relationKind": "participation",
+    "reasonStatementIds": [
+      "nolan-odyssey-participation-reason"
+    ],
+    "evidenceRefs": [
+      "evidence-nolan-odyssey-participation"
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "id": "evidence-odyssey-homer-context",
+  "revision": 1,
+  "status": "draft",
+  "review": null,
+  "spoilerWorkIds": [],
+  "kind": "evidence",
+  "slug": null,
+  "safeTitle": "根拠：odyssey-homer-context",
+  "safeSummary": "記述と資料の対応。",
+  "title": {
+    "text": "根拠：odyssey-homer-context",
+    "spoilerWorkIds": []
+  },
+  "payload": {
+    "type": "evidence",
+    "sourceId": "source-odyssey-universal",
+    "target": {
+      "kind": "relation",
+      "id": "odyssey-homer-context"
+    },
+    "locator": "作品紹介：Homer’s foundational saga",
+    "verificationNote": "AI調査メモ（人による確認前）：関係の理由と始点・終点の対応を確認する。",
+    "support": "fact"
+  }
+}
