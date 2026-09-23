@@ -2,7 +2,7 @@
 
 映画を入口に歴史・文化と制作・人物の背景を知るWebサービス。開発実績、実利用、個人noteを通じたKCP認知を目指す。
 
-作品選定に依存しない機能を実装中。詳細設計と実装計画は承認済み。正式名称・初期対象作品・人による内容確認担当は未確定で、実コンテンツはまだ掲載していない。
+Task 1〜7は実装済み。詳細設計と実装計画は承認済み。最初の対象は『オデュッセイア』（2026年）、当面は1作品、内容確認担当は中野さんに決定した。初稿はdraftで保存し、通常画面にはまだ掲載していない。[受入記録](docs/verification/first-work.md)を参照する。正式名称は未確定。
 
 ## 読む順序
 
@@ -16,12 +16,19 @@
 
 継続作業は[Notion Task](https://app.notion.com/p/3e4208bc20a38161b0eed4673bd5de2e)を参照する。資料中の個人ディレクトリへのリンクはローカル環境向け。
 
+## 原稿を画面で確認する
+
+リポジトリ直下で `npm run review:content` を実行し、[下書きの確認画面](http://127.0.0.1:4326/)を開く。『オデュッセイア』から本文・背景・人物・地図・年表・出典を確認できる。原稿を編集したらコマンドを再起動する。
+
+`npm run dev` は内容確認済みの掲載対象を表示するため、下書きだけの段階では作品一覧が空になる。
+
 ## 開発と検証
 
 Node.jsは.nvmrc、依存関係はpackage-lock.jsonで固定する。初回はnpm ciとnpx playwright install chromium webkitを実行する。
 
 ```sh
 npm run dev              # 原稿を検証してローカル起動
+npm run review:content   # 内容確認前の原稿をローカル表示（4326番）
 npm run check            # AstroとTypeScriptの型検査
 npm test                 # 単体・隔離ビルド検証
 npm run validate:content # 原稿の参照・公開条件
@@ -29,7 +36,7 @@ npm run build            # contentだけからdistへ生成
 npm run test:e2e          # テスト専用ビルドをChromium・WebKitで検証
 ```
 
-画面検証用の架空資料はtests/fixturesに置く。npm run build:e2eの出力.runtime/e2e-distはテスト専用であり、公開対象にしない。通常ビルドは実コンテンツ未投入のため空の作品一覧になる。直接astro buildを呼ぶと検証前の生成を拒否する。
+画面検証用の架空資料はtests/fixturesに置く。npm run build:e2eの出力.runtime/e2e-distはテスト専用であり、公開対象にしない。通常ビルドは実原稿が内容確認前のため空の作品一覧になる。直接astro buildを呼ぶと検証前の生成を拒否する。
 
 [画面方針](DESIGN.md)と[実装検証記録](docs/verification/implementation.md)を参照する。開発ハーネスはSuperpowers、実行方法はNative。最初の1作品を人が確認して受け入れてから追加する。
 

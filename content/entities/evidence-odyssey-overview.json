@@ -1,0 +1,26 @@
+{
+  "id": "evidence-odyssey-overview",
+  "revision": 1,
+  "status": "draft",
+  "review": null,
+  "spoilerWorkIds": [],
+  "kind": "evidence",
+  "slug": null,
+  "safeTitle": "根拠：odyssey-overview",
+  "safeSummary": "記述と資料の対応。",
+  "title": {
+    "text": "根拠：odyssey-overview",
+    "spoilerWorkIds": []
+  },
+  "payload": {
+    "type": "evidence",
+    "sourceId": "source-odyssey-universal",
+    "target": {
+      "kind": "content-statement",
+      "id": "odyssey-overview"
+    },
+    "locator": "作品紹介、Directed by、Written by、Cast",
+    "verificationNote": "AI調査メモ（人による確認前）：資料の該当箇所を参照して要約。",
+    "support": "fact"
+  }
+}

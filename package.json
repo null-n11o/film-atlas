@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx scripts/build.ts dev",
+    "review:content": "tsx scripts/review-content.ts && astro preview --ignore-lock --outDir .runtime/content-review --host 127.0.0.1 --port 4326",
     "check": "astro check",
     "test": "vitest run",
     "validate:content": "tsx scripts/validate-content.ts",
@@ -23,6 +24,7 @@
     "@playwright/test": "1.63.0",
     "@types/markdown-it": "14.2.0",
     "@types/node": "22.20.4",
+    "esbuild": "0.28.2",
     "tsx": "4.23.15",
     "typescript": "5.9.3",
     "vitest": "5.0.1"

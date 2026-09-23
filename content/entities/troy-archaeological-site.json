@@ -1,0 +1,29 @@
+{
+  "id": "troy-archaeological-site",
+  "revision": 1,
+  "status": "draft",
+  "review": null,
+  "spoilerWorkIds": [],
+  "kind": "place",
+  "slug": null,
+  "safeTitle": "トロイア遺跡（ヒサルルク）",
+  "safeSummary": "現在のトルコにある考古遺跡。原典に関係する地域の位置を示す代表点。",
+  "title": {
+    "text": "トロイア遺跡（ヒサルルク）",
+    "spoilerWorkIds": []
+  },
+  "payload": {
+    "type": "place",
+    "space": "earth",
+    "worldId": null,
+    "coordinates": {
+      "lat": 39.95644,
+      "lon": 26.239
+    },
+    "period": "複数時代の遺跡／表示位置は現在の所在地",
+    "precision": "approximate",
+    "evidenceRefs": [
+      "evidence-troy-archaeological-site"
+    ]
+  }
+}

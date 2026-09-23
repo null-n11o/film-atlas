@@ -1,0 +1,21 @@
+{
+  "id": "odyssey-2026",
+  "revision": 1,
+  "status": "draft",
+  "review": null,
+  "spoilerWorkIds": [],
+  "kind": "work",
+  "slug": "odyssey-2026",
+  "safeTitle": "オデュッセイア",
+  "safeSummary": "古代ギリシャの叙事詩をクリストファー・ノーランが映画化。原典の背景と映画制作の情報を出典からたどる。",
+  "title": {
+    "text": "オデュッセイア",
+    "spoilerWorkIds": []
+  },
+  "payload": {
+    "type": "work",
+    "jaTitle": "オデュッセイア",
+    "originalTitle": "The Odyssey",
+    "releaseYear": 2026
+  }
+}
